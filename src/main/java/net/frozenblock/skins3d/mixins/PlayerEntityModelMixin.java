@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import net.frozenblock.skins3d.Skins3D;
 import net.frozenblock.skins3d.model.CustomPlayerModel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -44,7 +45,9 @@ public class PlayerEntityModelMixin {
 
     @Inject(at = @At("TAIL"), method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V")
     private void render(LivingEntity livingEntity, float f, float g, float time, float i, float j, CallbackInfo ci) {
-        skins3D_Neo$face.skipDraw = Math.cos(time/5f + livingEntity.getUUID().variant()) < 0.95f;
+        if(Minecraft.getInstance().player == livingEntity && Minecraft.getInstance().options.getCameraType().isFirstPerson())
+            skins3D_Neo$face.skipDraw = true;
+        else skins3D_Neo$face.skipDraw = Math.cos(time/5f + livingEntity.getUUID().variant()) < 0.95f;
         if(Skins3D.configRes4) {
             face_root.copyFrom(skins3D_Neo$root.getChild("head"));
             skins3D_Neo$face.yRot = (float) Math.PI;
