@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,7 +46,7 @@ public class LivingEntityRendererMixin<S extends LivingEntityRenderState> {
             )
     )
     private void render(S state, PoseStack ms, MultiBufferSource buffer, int i, CallbackInfo ci) {
-        Skins3DUtils.FLAGGED = true;
+        if(state.entityType == EntityType.PLAYER) Skins3DUtils.FLAGGED = true;
     }
 
     @Inject(
@@ -57,6 +58,6 @@ public class LivingEntityRendererMixin<S extends LivingEntityRenderState> {
             )
     )
     private void render$1(S state, PoseStack ms, MultiBufferSource buffer, int i, CallbackInfo ci) {
-        Skins3DUtils.FLAGGED = false;
+        if(state.entityType == EntityType.PLAYER) Skins3DUtils.FLAGGED = false;
     }
 }
