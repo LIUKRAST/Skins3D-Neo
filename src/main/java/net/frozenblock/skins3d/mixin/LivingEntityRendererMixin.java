@@ -2,7 +2,6 @@ package net.frozenblock.skins3d.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.frozenblock.skins3d.Skins3D;
 import net.frozenblock.skins3d.Skins3DUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
